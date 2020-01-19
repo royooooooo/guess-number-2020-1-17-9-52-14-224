@@ -10,9 +10,11 @@ public class NumberGuessGame {
 
   private int inputTimes;
   private static int MAX_INPUT_TIMES = 6;
+  private Integer[] correctAnswer;
 
   public NumberGuessGame() {
     inputTimes = 0;
+    correctAnswer = AnswerGenerator.generate();
   }
 
   @SneakyThrows
@@ -27,7 +29,7 @@ public class NumberGuessGame {
     try {
       answerNumbers = Arrays.stream(answerSre).map(Integer::valueOf).distinct()
           .collect(toList());
-    }catch (Exception e){
+    } catch (Exception e) {
       throw new IllegalAnswerError();
     }
     if (answerNumbers.size() != 4) {

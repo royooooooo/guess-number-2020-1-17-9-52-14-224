@@ -23,10 +23,15 @@ public class NumberGuessGame {
     }
 
     String[] answerSre = userInput.split(" ");
-    List<Integer> answerNumbers = Arrays.stream(answerSre).map(Integer::valueOf).distinct()
-        .collect(toList());
-    if (answerNumbers.size() < 4) {
-      throw new SameNumberInAnswerError();
+    List<Integer> answerNumbers;
+    try {
+      answerNumbers = Arrays.stream(answerSre).map(Integer::valueOf).distinct()
+          .collect(toList());
+    }catch (Exception e){
+      throw new IllegalAnswerError();
+    }
+    if (answerNumbers.size() != 4) {
+      throw new IllegalAnswerError();
     }
   }
 }

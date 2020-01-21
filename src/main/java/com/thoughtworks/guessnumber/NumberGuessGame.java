@@ -20,19 +20,8 @@ public class NumberGuessGame {
     if (inputTimes > MAX_INPUT_TIMES) {
       throw new TooManyInputsError();
     }
-
-    String[] answerStr = userInput.split(" ");
-    int[] answerNumbers;
-    try {
-      answerNumbers = Arrays.stream(answerStr).mapToInt(Integer::parseInt).distinct().toArray();
-    } catch (Exception e) {
-      e.printStackTrace();
-      throw new IllegalAnswerError();
-    }
-    if (answerNumbers.length != 4) {
-      throw new IllegalAnswerError();
-    }
-
+    InputValidator.validate(userInput);
+    int[] answerNumbers = InputTranslator.translateInput(userInput);
     int correctNumber = 0;
     int positionWrongNumber = 0;
     for (int index = 0; index < answerNumbers.length; index++) {

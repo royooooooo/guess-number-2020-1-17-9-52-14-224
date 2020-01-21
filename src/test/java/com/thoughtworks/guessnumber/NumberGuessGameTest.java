@@ -1,8 +1,24 @@
 package com.thoughtworks.guessnumber;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({AnswerGenerator.class})
 public class NumberGuessGameTest {
+
+  @Before
+  public void setUp() {
+    PowerMockito.mockStatic(AnswerGenerator.class);
+    when(AnswerGenerator.generate()).thenReturn(new Integer[]{1, 2, 3, 4});
+  }
 
   @Test
   public void should_receive_user_input() {
@@ -34,5 +50,12 @@ public class NumberGuessGameTest {
     numberGuessGame.inputAnswer("11 3 4");
   }
 
+  @Test
+  public void should_return_result_when_user_input_answer() {
+    NumberGuessGame numberGuessGame = new NumberGuessGame();
 
+    assertEquals(numberGuessGame.inputAnswer("1 5 6 7"), "1A0B");
+    assertEquals(numberGuessGame.inputAnswer("2 4 7 8"), "0A2B");
+    assertEquals(numberGuessGame.inputAnswer("0 3 2 4"), "1A2B");
+  }
 }

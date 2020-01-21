@@ -5,21 +5,18 @@ import lombok.SneakyThrows;
 
 public class NumberGuessGame {
 
-  private int inputTimes;
-  private static int MAX_INPUT_TIMES = 6;
   private Integer[] correctAnswer;
+  private Counter counter;
+  private final int MAX_INPUT_TIMES = 6;
 
   public NumberGuessGame() {
-    inputTimes = 0;
     correctAnswer = AnswerGenerator.generate();
+    counter = new Counter(MAX_INPUT_TIMES);
   }
 
   @SneakyThrows
   public String inputAnswer(String userInput) {
-    inputTimes++;
-    if (inputTimes > MAX_INPUT_TIMES) {
-      throw new TooManyInputsError();
-    }
+    counter.count();
     InputValidator.validate(userInput);
     int[] answerNumbers = InputTranslator.translateInput(userInput);
     int correctNumber = 0;

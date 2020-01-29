@@ -1,5 +1,6 @@
 package com.thoughtworks.guessnumber;
 
+import com.thoughtworks.guessnumber.exception.IllegalAnswerError;
 import lombok.SneakyThrows;
 
 public class InputValidator {

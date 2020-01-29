@@ -3,6 +3,8 @@ package com.thoughtworks.guessnumber;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
+import com.thoughtworks.guessnumber.exception.IllegalAnswerError;
+import com.thoughtworks.guessnumber.exception.TooManyInputsError;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

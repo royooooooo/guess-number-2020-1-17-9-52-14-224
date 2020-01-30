@@ -53,11 +53,13 @@ public class NumberGuessGameTest {
   }
 
   @Test
-  public void should_return_result_when_user_input_answer() {
+  public void should_return_previous_answer_when_user_input_repeatedly() {
     NumberGuessGame numberGuessGame = new NumberGuessGame();
 
-    assertEquals(numberGuessGame.inputAnswer("1 5 6 7"), "1A0B");
-    assertEquals(numberGuessGame.inputAnswer("2 4 7 8"), "0A2B");
-    assertEquals(numberGuessGame.inputAnswer("0 3 2 4"), "1A2B");
+    assertEquals(numberGuessGame.inputAnswer("1 5 6 7"), "[1, 5, 6, 7], 1A0B\n");
+    assertEquals(numberGuessGame.inputAnswer("2 4 7 8"),
+        "[1, 5, 6, 7], 1A0B\n[2, 4, 7, 8], 0A2B\n");
+    assertEquals(numberGuessGame.inputAnswer("0 3 2 4"),
+        "[1, 5, 6, 7], 1A0B\n[2, 4, 7, 8], 0A2B\n[0, 3, 2, 4], 1A2B\n");
   }
 }
